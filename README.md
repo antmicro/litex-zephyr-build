@@ -30,6 +30,12 @@ The working flow with this repository is almost identical to using
 the LiteX and Zephyr in the standard way. The only difference is that
 the `zephyr-env.sh` file is sourced automatically within this directory.
 
+### Cloning repository
+
+```
+git clone --recursive https://github.com/rw1nkler/litex-zephyr-build
+```
+
 ### Preparing repository
 
 ```
