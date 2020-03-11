@@ -1,0 +1,33 @@
+[submodule "third_party/zephyr"]
+	path = third_party/zephyr
+	url = https://github.com/zephyrproject-rtos/zephyr
+[submodule "third_party/litex"]
+	path = third_party/litex
+	url = https://github.com/enjoy-digital/litex
+[submodule "third_party/litedram"]
+	path = third_party/litedram
+	url = https://github.com/enjoy-digital/litedram
+[submodule "third_party/liteeth"]
+	path = third_party/liteeth
+	url = https://github.com/enjoy-digital/liteeth
+[submodule "third_party/litepcie"]
+	path = third_party/litepcie
+	url = https://github.com/enjoy-digital/litepcie
+[submodule "third_party/litesata"]
+	path = third_party/litesata
+	url = https://github.com/enjoy-digital/litesata
+[submodule "third_party/litesdcard"]
+	path = third_party/litesdcard
+	url = https://github.com/enjoy-digital/litesdcard
+[submodule "third_party/liteiclink"]
+	path = third_party/liteiclink
+	url = https://github.com/enjoy-digital/liteiclink
+[submodule "third_party/litejesd204b"]
+	path = third_party/litejesd204b
+	url = https://github.com/enjoy-digital/litejesd204b
+[submodule "third_party/litevideo"]
+	path = third_party/litevideo
+	url = https://github.com/enjoy-digital/litevideo
+[submodule "third_party/litescope"]
+	path = third_party/litescope
+	url = https://github.com/enjoy-digital/litescope
