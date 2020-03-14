@@ -39,7 +39,7 @@ toolchain/init:
 	make toolchain/direnv
 
 toolchain/prerequisites:
-	sudo apt install autoconf automake autotools-dev curl libmpc-dev \
+	sudo apt install -y autoconf automake autotools-dev curl libmpc-dev \
                      libmpfr-dev libgmp-dev gawk build-essential bison flex \
                      texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
 
@@ -80,7 +80,7 @@ zephyr/init:
 	make zephyr/direnv
 
 zephyr/prerequisites:
-	sudo apt install --no-install-recommends git cmake ninja-build gperf \
+	sudo apt install --no-install-recommends -y git cmake ninja-build gperf \
                      ccache dfu-util device-tree-compiler wget \
                      python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
                      make gcc gcc-multilib
@@ -92,10 +92,11 @@ zephyr/prerequisites:
 	pip3 install -r third_party/zephyr/scripts/requirements.txt
 
 zephyr/sdk:
-	mkdir -p ${ZEPHYR_DIR}; mkdir -p ${ZEPHYR_SDK_DIR}
+	rm -rf ${ZEPHYR_DIR}
+	mkdir -p ${ZEPHYR_SDK_DIR}
 	cd ${ZEPHYR_DIR}; wget ${ZEPHYR_SDK_URL} -O ${ZEPHYR_SDK_FILE_NAME}
 	cd ${ZEPHYR_DIR}; chmod +x ${ZEPHYR_SDK_FILE_NAME}
-	cd ${ZEPHYR_DIR}; ./${ZEPHYR_SDK_FILE_NAME} -- -d ${ZEPHYR_SDK_DIR}
+	cd ${ZEPHYR_DIR}; echo n | ./${ZEPHYR_SDK_FILE_NAME} -- -d ${ZEPHYR_SDK_DIR}
 
 zephyr/direnv:
 	echo "export ZEPHYR_TOOLCHAIN_VARIANT=${ZEPHYR_TOOLCHAIN_VARIANT}" >> .envrc.local
@@ -108,13 +109,25 @@ zephyr/direnv:
 
 XC3SPROG_DIR=${TOOLS_DIR}/xc3sprog
 XC3SPROG_BUILD_DIR=${XC3SPROG_DIR}/build
+LIBFTD2XX_DIR=${TOOLS_DIR}/libftd2xx
 
 xc3sprog/init:
+	make xc3sprog/prerequisites
 	make xc3sprog/build
 	make xc3sprog/direnv
 
+xc3sprog/prerequisites:
+	sudo apt install -y libusb-dev libftdi-dev cmake
+	mkdir -p ${LIBFTD2XX_DIR}
+	cd ${LIBFTD2XX_DIR}; wget https://www.ftdichip.com/Drivers/D2XX/Linux/libftd2xx-i386-1.4.8.gz
+	cd ${LIBFTD2XX_DIR}; tar -xzf libftd2xx-i386-1.4.8.gz
+	cd ${LIBFTD2XX_DIR}; cd release/build && \
+        sudo cp libftd2xx.* /usr/local/lib && \
+        sudo chmod 0755 /usr/local/lib/libftd2xx.so.1.4.8 && \
+        sudo ln -sf /usr/local/lib/libftd2xx.so.1.4.8 /usr/local/lib/libftd2xx.so
+
 xc3sprog/build:
-	mkdir -p ${XC3SPROG_DIR};
+	mkdir -p ${XC3SPROG_DIR}
 	cd ${XC3SPROG_DIR}; git clone --recursive https://github.com/rw1nkler/xc3sprog .
 	mkdir -p ${XC3SPROG_BUILD_DIR};
 	cd ${XC3SPROG_BUILD_DIR}; cmake ..
