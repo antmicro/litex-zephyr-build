@@ -1,3 +1,5 @@
+![Build Status](http://83.238.210.90:8080/buildStatus/icon?job=litex-zephyr-build)
+
 # Getting Started
 
 ## Prerequisites
