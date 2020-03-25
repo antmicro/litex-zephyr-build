@@ -7,7 +7,11 @@ help:
 	@echo "This repository contains a very simple building environment for Zephyr OS"
 	@echo "-------------------------------------------------------------------------"
 	@echo "You can use the following rules:"
-	@echo "    make/init - To prepare the environment"
+	@echo "    init               - To prepare the environment"
+	@echo "    toolchain/init     - To build only the riscv toolchain"
+	@echo "    zephyr/init        - To build only the Zephyr SDK"
+	@echo "    xc3sprog/init      - To build only the xc3sprog"
+	@echo "    git/update         - To update the submodules to the latest version"
 
 init:
 	make toolchain/init

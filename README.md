@@ -2,47 +2,54 @@
 
 # Getting Started
 
-## Prerequisites
-
-This repository requires `direnv` program. You can install it using:
+## Clone repository
 ```
-sudo apt install direnv
+git clone --recursive https://github.com/rw1nkler/litex-zephyr-build
 ```
 
-Then you should add appropriate hook to your shell init-file, i.e., for bash
-you should add these lines to your `~/.bashrc`:
+## Install Prerequisites
+
+This repository requires `direnv` program. It is used to manage the environment
+variables and the python virtual environment within this repository.
+You can install and configure `direnv` using  `prerequisites.sh` script:
 
 ```
-eval "$(direnv hook bash)"
+./prerequisites.sh
 ```
 
-Direnv is used to manage virtual environment and setting some system environment variables automatically.
+The script will install direnv and add a special hook to the end
+of your `~/.bashrc`. This is *standard* setup for this program.
 
-If you want to see the virtual environment in your prompt, read the
-[Python chapter](https://github.com/direnv/direnv/wiki/Python) in direnv Wiki.
+If you want to see the virtual environment in your prompt,
+which is *highly recommended*, read the
+[Python chapter](https://github.com/direnv/direnv/wiki/Python) in `direnv` Wiki.
+This will allow you to see that the `direnv` sets the proper virtual environment
+for this directory.
 
 ## Basic Usage
 
 This repository ensures that you are using only local litex and migen repositories.
-It also creates a python virtual environment with all required packages.
+It also creates a python virtual environment with all the required packages.
 This virtual environment resides in the `.direnv/` directory in this repository
-and is automatically set when you enter this repository.
+and is automatically set when you enter this directory.
 
 The working flow with this repository is almost identical to using
 the LiteX and Zephyr in the standard way. The only difference is that
 the `zephyr-env.sh` file is sourced automatically within this directory.
 
-### Cloning repository
+### Preparing tools
 
-```
-git clone --recursive https://github.com/rw1nkler/litex-zephyr-build
-```
-
-### Preparing repository
-
+To prepare the needed tools, use:
 ```
 make init
 ```
+
+The command will install the following tools to the `tools/` directory:
+- riscv toolchain
+- zephyr SDK
+- xc3sprog
+
+For selective installation, see the `Makefile`.
 
 ### Compiling LiteX (for Arty Board)
 
@@ -61,4 +68,4 @@ mkdir build
 cd build
 cmake -DBOARD=litex_vexriscv ..
 make -j$(nproc)
-````
+```
