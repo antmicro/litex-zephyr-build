@@ -1,10 +1,8 @@
-![Build Status](http://83.238.210.90:8080/buildStatus/icon?job=litex-zephyr-build)
-
 # Getting Started
 
 ## Clone repository
 ```
-git clone --recursive https://github.com/rw1nkler/litex-zephyr-build
+git clone --recursive https://github.com/antmicro/zephyr-on-litex-vexriscv-build
 ```
 
 ## Install Prerequisites
